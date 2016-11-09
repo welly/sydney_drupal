@@ -1,0 +1,17 @@
+
+sydney_drupal.quiz_form:
+  path: '/quiz'
+  defaults:
+    _form: '\Drupal\sydney_drupal\Form\QuizForm'
+    _title: 'Beer Quiz'
+  requirements:
+    _access: 'TRUE'
+
+
+sydney_drupal.answers:
+  path: '/quiz/answers'
+  defaults:
+    _controller: '\Drupal\sydney_drupal\Controller\AnswersController::answers'
+    _title: 'Beer Quiz - Results!'
+  requirements:
+    _access: 'TRUE'

@@ -1,0 +1,5 @@
+name: Sydney Drupal
+type: module
+description: Sydney Drupal
+core: 8.x
+package: Custom

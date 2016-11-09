@@ -1,0 +1,14 @@
+{
+  "name": "drupal/sydney_drupal",
+  "type": "drupal-module",
+  "description": "Sydney Drupal",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/sydney_drupal",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/sydney_drupal",
+    "source": "http://cgit.drupalcode.org/sydney_drupal"
+  },
+  "require": { }
+}
