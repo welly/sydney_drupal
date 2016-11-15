@@ -3,7 +3,6 @@
 namespace Drupal\sydney_drupal\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\DependencyInjection\ContainerInjectionInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\Core\State\State;
 
@@ -20,6 +19,31 @@ class AnswersController extends ControllerBase  {
   const MAX_SCORE = 5;
 
   /**
+   * Drupal\Core\State\State definition.
+   *
+   * @var \Drupal\Core\State\State
+   */
+  protected $stateStore;
+
+  /**
+   * AnswersController constructor.
+   * @param \Drupal\Core\State\State $state_store
+   */
+  public function __construct(State $state_store) {
+    $this->stateStore = $state_store;
+  }
+
+  /**
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @return static
+   */
+  public static function create (ContainerInterface $container) {
+    return new static(
+      $container->get('state')
+    );
+  }
+
+  /**
    * Results.
    *
    * @return string
@@ -30,7 +54,7 @@ class AnswersController extends ControllerBase  {
     $correct_answers = 0;
 
     foreach (range(1, 3) as $number) {
-      $answers['question_' . $number] = \Drupal::state()->get('sydney_drupal.question_' . $number);
+      $answers['question_' . $number] = $this->stateStore->get('sydney_drupal.question_' . $number);
     }
 
     foreach($answers as $question => $answer) {

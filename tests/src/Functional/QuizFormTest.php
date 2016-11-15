@@ -7,6 +7,7 @@ use Drupal\user\Entity\Role;
 
 /**
  * @group sydney_drupal
+ * @group functional
  */
 
 class QuizFormTest extends BrowserTestBase {

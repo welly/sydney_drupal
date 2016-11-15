@@ -5,7 +5,6 @@ namespace Drupal\sydney_drupal\Form;
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
-use Drupal\Core\Form\FormBuilder;
 use Drupal\Core\State\State;
 
 /**
@@ -14,13 +13,6 @@ use Drupal\Core\State\State;
  * @package Drupal\sydney_drupal\Form
  */
 class QuizForm extends FormBase {
-
-  /**
-   * Drupal\Core\Form\FormBuilder definition.
-   *
-   * @var \Drupal\Core\Form\FormBuilder
-   */
-  protected $formBuilder;
 
   /**
    * Drupal\Core\State\State definition.
@@ -34,14 +26,16 @@ class QuizForm extends FormBase {
    * @param \Drupal\Core\Form\FormBuilder $form_builder
    * @param \Drupal\Core\State\State $state_store
    */
-  public function __construct(FormBuilder $form_builder, State $state_store) {
-    $this->formBuilder = $form_builder;
+  public function __construct(State $state_store) {
     $this->stateStore = $state_store;
   }
 
+  /**
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   * @return static
+   */
   public static function create(ContainerInterface $container) {
     return new static(
-      $container->get('form_builder'),
       $container->get('state')
     );
   }
@@ -105,13 +99,6 @@ class QuizForm extends FormBase {
     ];
 
     return $form;
-  }
-
-  /**
-    * {@inheritdoc}
-    */
-  public function validateForm(array &$form, FormStateInterface $form_state) {
-    parent::validateForm($form, $form_state);
   }
 
   /**

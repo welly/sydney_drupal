@@ -9,6 +9,7 @@ use Drupal\sydney_drupal\Controller\AnswersController;
  * Explanation as to the purpose of this test class.
  *
  * @group sydney_drupal
+ * @group unit
  */
 class QuizResultsTest extends UnitTestCase {
 
