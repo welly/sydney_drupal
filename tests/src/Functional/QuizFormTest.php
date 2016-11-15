@@ -39,6 +39,7 @@ class QuizFormTest extends BrowserTestBase {
     $assert->pageTextContains('Beer Quiz');
 
     $button->click();
+    $assert->addressEquals('/quiz/answers');
     $assert->pageTextContains('You got 0 correct');
   }
 
@@ -54,6 +55,7 @@ class QuizFormTest extends BrowserTestBase {
     $page->selectFieldOption('question_2', 'Carlton Draught');
 
     $button->click();
+    $assert->addressEquals('/quiz/answers');
     $assert->pageTextContains('You got 2 correct');
   }
 
@@ -67,11 +69,13 @@ class QuizFormTest extends BrowserTestBase {
 
     $page->fillField('question_1', 'Jamaica');
     $page->selectFieldOption('question_2', 'Carlton Draught');
+    $page->
     $page->checkField('question_3[Barley]');
     $page->checkField('question_3[Water]');
     $page->checkField('question_3[Hops]');
 
     $button->click();
+    $assert->addressEquals('/quiz/answers');
     $assert->pageTextContains('You got 5 correct');
   }
 
@@ -87,6 +91,7 @@ class QuizFormTest extends BrowserTestBase {
     $page->selectFieldOption('question_2', 'Crown Lager');
 
     $button->click();
+    $assert->addressEquals('/quiz/answers');
     $assert->pageTextContains('You got 0 correct');
   }
 
