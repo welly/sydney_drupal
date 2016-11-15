@@ -15,6 +15,8 @@ class QuizFormTest extends BrowserTestBase {
 
   public function setUp() {
     parent::setUp();
+
+    // Some more initial setup stuff here...
   }
 
   public function testFormExists() {
@@ -37,7 +39,6 @@ class QuizFormTest extends BrowserTestBase {
 
     $button->click();
     $assert->pageTextContains('You got 0 correct');
-
   }
 
   public function testSubmitSemiFilledForm() {
@@ -53,7 +54,6 @@ class QuizFormTest extends BrowserTestBase {
 
     $button->click();
     $assert->pageTextContains('You got 2 correct');
-
   }
 
   public function testSubmitFullyFilledForm() {
@@ -71,7 +71,6 @@ class QuizFormTest extends BrowserTestBase {
     $page->checkField('question_3[Hops]');
     $button->click();
     $assert->pageTextContains('You got 5 correct');
-
   }
 
   public function testSubmitIncorrectlyFilledForm() {
@@ -87,7 +86,6 @@ class QuizFormTest extends BrowserTestBase {
 
     $button->click();
     $assert->pageTextContains('You got 0 correct');
-
   }
 
 }

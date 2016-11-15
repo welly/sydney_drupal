@@ -2,12 +2,12 @@
 
 namespace Drupal\Tests\sydney_drupal\Unit;
 
-use Drupal\Core\State\State;
 use Drupal\Tests\UnitTestCase;
 use Drupal\sydney_drupal\Controller\AnswersController;
 
 /**
- * Class QuizResultsTest
+ * Explanation as to the purpose of this test class.
+ *
  * @group sydney_drupal
  */
 class QuizResultsTest extends UnitTestCase {
@@ -48,6 +48,26 @@ class QuizResultsTest extends UnitTestCase {
     $this->assertEquals(2, $this->answersController->parseQuestionThree(['Barley', 'Water', 'Potatoes']));
     $this->assertEquals(1, $this->answersController->parseQuestionThree(['Barley', 'Carrots', 'Potatoes']));
     $this->assertEquals(0, $this->answersController->parseQuestionThree(['Bananas', 'Carrots', 'Potatoes']));
+  }
+
+  /**
+   * Testing parseQuestionThree function with data provider.
+   *
+   * @dataProvider providerQuestionThree
+   */
+  public function testParseQuestionThreeProvider($expected, $ingredients) {
+    $this->assertEquals($expected, $this->answersController->parseQuestionThree($ingredients));
+  }
+
+  public function providerQuestionThree() {
+    return [
+      [3, ['Barley', 'Water', 'Hops']],
+      [2, ['Barley', 'Water', 'Potatoes']],
+      [1, ['Barley', 'Carrots', 'Potatoes']],
+      [0, ['Bananas', 'Carrots', 'Potatoes']],
+      [0, ['Chicken', 'Ham', 'Beef']],
+      [0, ['Big Mac', 'Whopper', 'Kebab']],
+    ];
   }
 
 }
