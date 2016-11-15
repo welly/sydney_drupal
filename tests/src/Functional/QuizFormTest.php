@@ -51,7 +51,7 @@ class QuizFormTest extends BrowserTestBase {
     $button = $page->findButton('Submit');
 
     $page->fillField('question_1', 'Jamaica');
-    $page->fillField('question_2', 'Carlton Draught');
+    $page->selectFieldOption('question_2', 'Carlton Draught');
 
     $button->click();
     $assert->pageTextContains('You got 2 correct');
@@ -66,10 +66,11 @@ class QuizFormTest extends BrowserTestBase {
     $button = $page->findButton('Submit');
 
     $page->fillField('question_1', 'Jamaica');
-    $page->fillField('question_2', 'Carlton Draught');
+    $page->selectFieldOption('question_2', 'Carlton Draught');
     $page->checkField('question_3[Barley]');
     $page->checkField('question_3[Water]');
     $page->checkField('question_3[Hops]');
+
     $button->click();
     $assert->pageTextContains('You got 5 correct');
   }
@@ -83,7 +84,7 @@ class QuizFormTest extends BrowserTestBase {
     $button = $page->findButton('Submit');
 
     $page->fillField('question_1', 'Penrith');
-    $page->fillField('question_2', 'Crown Lager');
+    $page->selectFieldOption('question_2', 'Crown Lager');
 
     $button->click();
     $assert->pageTextContains('You got 0 correct');
