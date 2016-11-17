@@ -59,7 +59,8 @@ class QuizForm extends FormBase {
 
     $form['question_1'] = [
       '#type' => 'textfield',
-      '#title' => $this->t('1. Which nation does the lager &#039;Red Stripe&#039; come from?'),
+      '#type' => 'textfield',
+      '#title' => $this->t('1. Which country does the beer &#039;Stella Artois&#039; come from?'),
       '#maxlength' => 64,
       '#size' => 64,
     ];

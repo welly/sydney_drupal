@@ -11,7 +11,7 @@ use Drupal\sydney_drupal\Controller\AnswersController;
  * @group sydney_drupal
  * @group unit
  */
-class QuizResultsTest extends UnitTestCase {
+class QuizUnitTest extends UnitTestCase {
 
   public $answersController;
 
@@ -24,11 +24,11 @@ class QuizResultsTest extends UnitTestCase {
    * Testing parseQuestionOne function.
    */
   public function testParseQuestionOne() {
-    $this->assertEquals(true, $this->answersController->parseQuestionOne('Jamaica'));
-    $this->assertEquals(true, $this->answersController->parseQuestionOne('JAMAICA'));
-    $this->assertEquals(true, $this->answersController->parseQuestionOne('Jamaica!'));
-    $this->assertTrue($this->answersController->parseQuestionOne('Jamaica...'));
-    $this->assertFalse($this->answersController->parseQuestionOne('Bundaberg'));
+    $this->assertEquals(true, $this->answersController->parseQuestionOne('Belgium'));
+    $this->assertEquals(true, $this->answersController->parseQuestionOne('BELGIUM'));
+    $this->assertEquals(true, $this->answersController->parseQuestionOne('Belgium!!'));
+    $this->assertTrue($this->answersController->parseQuestionOne('Belgium...'));
+    $this->assertFalse($this->answersController->parseQuestionOne('Parramatta'));
   }
 
   /**
@@ -69,6 +69,39 @@ class QuizResultsTest extends UnitTestCase {
       [0, ['Chicken', 'Ham', 'Beef']],
       [0, ['Big Mac', 'Whopper', 'Kebab']],
     ];
+  }
+
+  /**
+   * Testing parseQuestionOne function using mock.
+   *
+   * @dataProvider providerQuestionOneMock
+   */
+  public function testParseQuestionOneMock($expected, $location) {
+
+    $answersController = $this->getMockAnswerResponse();
+
+    $this->assertEquals($expected, $answersController->parseQuestionOne($location));
+  }
+
+  public function providerQuestionOneMock() {
+    return [
+      [true, 'Jamaica'],
+      [true, 'Brentford'],
+      [true, 'Penrith'],
+    ];
+  }
+
+  public function getMockAnswerResponse() {
+    $answer = $this->getMockBuilder(AnswersController::class)
+      ->setMethods(['parseQuestionOne'])
+      ->getMock();
+
+    $answer->expects($this->any())
+      ->method('parseQuestionOne')
+      ->willReturn(TRUE);
+
+    return $answer;
+
   }
 
 }

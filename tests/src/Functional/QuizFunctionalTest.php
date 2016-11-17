@@ -10,7 +10,7 @@ use Drupal\user\Entity\Role;
  * @group functional
  */
 
-class QuizFormTest extends BrowserTestBase {
+class QuizFunctionalTest extends BrowserTestBase {
 
   public static $modules = ['sydney_drupal'];
 
@@ -51,7 +51,7 @@ class QuizFormTest extends BrowserTestBase {
     $page = $this->getSession()->getPage();
     $button = $page->findButton('Submit');
 
-    $page->fillField('question_1', 'Jamaica');
+    $page->fillField('question_1', 'Belgium');
     $page->selectFieldOption('question_2', 'Carlton Draught');
 
     $button->click();
@@ -59,7 +59,7 @@ class QuizFormTest extends BrowserTestBase {
     $assert->pageTextContains('You got 2 correct');
   }
 
-  public function testSubmitFullyFilledForm() {
+  public function testSubmitCorrectAnswers() {
 
     $this->drupalGet('/quiz');
 
@@ -67,16 +67,16 @@ class QuizFormTest extends BrowserTestBase {
     $page = $this->getSession()->getPage();
     $button = $page->findButton('Submit');
 
-    $page->fillField('question_1', 'Jamaica');
+    $page->fillField('question_1', 'Belgium');
     $page->selectFieldOption('question_2', 'Carlton Draught');
-    $page->
     $page->checkField('question_3[Barley]');
     $page->checkField('question_3[Water]');
     $page->checkField('question_3[Hops]');
 
     $button->click();
     $assert->addressEquals('/quiz/answers');
-    $assert->pageTextContains('You got 5 correct');
+    $assert->pageTextContains('You got 5 correct!');
+    $assert->pageTextContains('You got the maximum score!');
   }
 
   public function testSubmitIncorrectlyFilledForm() {
